@@ -79,12 +79,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="color.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="color.vs">
-      <Filter>Shaders</Filter>
-    </None>
     <None Include="texture.ps">
       <Filter>Shaders</Filter>
     </None>

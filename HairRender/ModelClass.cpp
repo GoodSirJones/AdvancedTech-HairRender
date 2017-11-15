@@ -18,16 +18,16 @@ ModelClass::~ModelClass()
 
 }
 
-bool ModelClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* textureFilename)
+bool ModelClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* modelFilename, char* textureFilename)
 {
 	bool result;
 
-	/*
+	
 	result = LoadModel(device, deviceContext, modelFilename);
 	if (!result)
 	{
 		return false;
-	}*/
+	}
 
 	result = InitializeBuffers(device);
 	if (!result)
@@ -46,7 +46,7 @@ void ModelClass::Shutdown()
 
 	ShutdownBuffers();
 
-	//ReleaseModel();
+	ReleaseModel();
 
 	return;
 }
@@ -77,8 +77,8 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	HRESULT result;
 	int i;
 
-	m_vertexCount = 3;
-	m_indexCount = 3;
+	m_vertexCount = 36;
+	m_indexCount = 36;
 
 	vertices = new VertexType[m_vertexCount];
 	if (!vertices)
@@ -91,7 +91,7 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	{
 		return false;
 	}
-/*
+
 	for (i = 0; i < m_vertexCount; i++)
 	{
 		vertices[i].position = XMFLOAT3(m_model[i].x, m_model[i].y, m_model[i].z);
@@ -99,23 +99,25 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 		vertices[i].normal = XMFLOAT3(m_model[i].nx, m_model[i].ny, m_model[i].nz);
 
 		indices[i] = i;
-	}*/
-	
-	vertices[0].position = XMFLOAT3(-1.0f, -1.0f, 0.0f);
-	vertices[0].texture = XMFLOAT2(0.0f, 1.0f);
+	}
+/*	
+	vertices[0].position = XMFLOAT3(-1.0f, 1.0f, -1.0f);
+	vertices[0].texture = XMFLOAT2(0.0f, 0.0f);
 	vertices[0].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 
-	vertices[1].position = XMFLOAT3(0.0f, 1.0f, 0.0f);
-	vertices[1].texture = XMFLOAT2(0.5f, 0.0f);
+	vertices[1].position = XMFLOAT3(1.0f, 1.0f, -1.0f);
+	vertices[1].texture = XMFLOAT2(1.0f, 0.0f);
 	vertices[1].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
 
-	vertices[2].position = XMFLOAT3(1.0f, -1.0f, 0.0f);
-	vertices[2].texture = XMFLOAT2(1.0f, 1.0f);
+	vertices[2].position = XMFLOAT3(-1.0f, -1.0f, -1.0f);
+	vertices[2].texture = XMFLOAT2(0.0f, 1.0f);
 	vertices[2].normal = XMFLOAT3(0.0f, 0.0f, -1.0f);
+
 
 	indices[0] = 0;
 	indices[1] = 1;
 	indices[2] = 2;
+*/
 
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_vertexCount;
@@ -226,7 +228,7 @@ void ModelClass::ReleaseTexture()
 	return;
 }
 
-/*
+
 bool ModelClass::LoadModel(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename)
 {
 	ifstream fin;
@@ -268,6 +270,7 @@ bool ModelClass::LoadModel(ID3D11Device* device, ID3D11DeviceContext* deviceCont
 	for (i = 0; i < m_vertexCount; i++)
 	{
 		fin >> m_model[i].x >> m_model[i].y >> m_model[i].z;
+		fin >> m_model[i].tu >> m_model[i].tv;
 		fin >> m_model[i].nx >> m_model[i].ny >> m_model[i].nz;
 	}
 
@@ -285,4 +288,4 @@ void ModelClass::ReleaseModel()
 	}
 
 	return;
-}*/
+}

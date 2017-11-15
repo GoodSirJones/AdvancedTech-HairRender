@@ -42,7 +42,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 
-	m_Camera->SetPosition(-1.0f, -1.0f, -5.0f);
+	m_Camera->SetPosition(0.0f, 0.0f, -5.0f);
 	m_Model = new ModelClass;
 
 
@@ -51,7 +51,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 
-	result = m_Model->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), "../Resources/stone01.tga");
+	result = m_Model->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), "../Resources/cube.txt", "../Resources/stone01.tga");
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -151,7 +151,7 @@ bool GraphicsClass::Render(float rotation)
 	m_Camera->GetViewMatrix(viewMatrix);
 	m_Direct3D->GetProjectionMatrix(projectionMatrix);
 
-	XMMatrixRotationY(rotation);
+	worldMatrix = XMMatrixRotationY(rotation);
 
 	m_Model->Render(m_Direct3D->GetDeviceContext());
 
