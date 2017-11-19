@@ -6,6 +6,7 @@
 #include "Cameraclass.h"
 #include "textureshaderclass.h"
 #include "Lightclass.h"
+#include "inputclass.h"
 
 const bool FULL_SCREEN = false;
 const bool VSYNC_ENABLED = true;

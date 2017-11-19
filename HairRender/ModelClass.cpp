@@ -77,9 +77,6 @@ bool ModelClass::InitializeBuffers(ID3D11Device* device)
 	HRESULT result;
 	int i;
 
-	m_vertexCount = 36;
-	m_indexCount = 36;
-
 	vertices = new VertexType[m_vertexCount];
 	if (!vertices)
 	{
